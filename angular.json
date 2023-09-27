@@ -63,7 +63,8 @@
               "browserTarget": "task-manager:build:production"
             },
             "development": {
-              "browserTarget": "task-manager:build:development"
+              "browserTarget": "task-manager:build:development",
+              "proxyConfig": "proxy.config.json"
             }
           },
           "defaultConfiguration": "development"
