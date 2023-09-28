@@ -12,12 +12,10 @@ const userTasksRoutes: Routes = [
     children: [
       {
         path: '',
-        pathMatch: 'full',
         component: UserTasksListComponent,
       },
       {
         path: 'create',
-        pathMatch: 'full',
         component: UserTasksCreateComponent,
       },
     ],

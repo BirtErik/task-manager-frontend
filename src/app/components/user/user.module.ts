@@ -5,12 +5,7 @@ import { UserComponent } from './user.component';
 
 const userRoutes: Routes = [
   {
-    path: '',
-    component: UserComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'list',
+    path: 'user',
     loadChildren: () =>
       import('./user-tasks/user-tasks.module').then((m) => m.UserTasksModule),
   },
