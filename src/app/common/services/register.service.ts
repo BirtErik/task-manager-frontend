@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-interface Login {
+interface Register {
+  username: string;
   email: string;
   password: string;
 }
@@ -9,10 +10,10 @@ interface Login {
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class RegisterService {
   constructor(private http: HttpClient) {}
 
-  loginUser(loginData: Login) {
-    return this.http.post('http://localhost:8080/auth/login', loginData);
+  register(registerData: Register) {
+    return this.http.post('http://localhost:8080/auth/register', registerData);
   }
 }
