@@ -10,9 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './components/home/home.module';
 import { AuthModule } from './components/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { MaterialModule } from './common/material/material.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     UserModule,
@@ -21,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    TabMenuModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
