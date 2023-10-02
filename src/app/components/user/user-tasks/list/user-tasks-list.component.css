@@ -1,0 +1,74 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+.input-desc{
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    min-height: 100px;
+}
+
+.center-content {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.priority {
+    float: right;
+    margin: 0;
+}
+
+.status {
+    float: left;
+    margin: 0;
+}
+
+mat-panel-description {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-accordion{
+    width: 50%;
+} 
+
+p{
+    margin: 10px;
+}
+
+mat-panel-title mat-form-field {
+    width: 100%; 
+    height: 70px;
+    padding: 0;
+    margin-top: 23px;
+    font-size: 13px;
+}
+
+.button-edit {
+    float: right;
+}
+
+.button-save {
+    float:right;
+}
+
+.button-delete .button-save{
+    padding: 18px;
+    margin: 20px;
+}
+
+.button-new {
+    padding: 10px;
+    margin: 10px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
