@@ -1,0 +1,15 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  header, footer {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .project-description {
+    margin-top: 20px;
+  }
