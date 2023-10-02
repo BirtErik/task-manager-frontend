@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { RegisterService } from 'src/app/common/services/register.service';
 import { catchError, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 interface Register {
   username: string;
@@ -19,14 +20,16 @@ interface Register {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   regError: boolean = false;
   registerData!: Register;
+  isLoading: boolean = false;
 
   constructor(
     private readonly registerService: RegisterService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +53,7 @@ export class RegisterComponent {
       email: this.registerForm.get('email')?.value,
       password: this.registerForm.get('password')?.value,
     };
-
+    this.isLoading = true;
     this.registerService
       .register(this.registerData)
       .pipe(
@@ -62,9 +65,14 @@ export class RegisterComponent {
       )
       .subscribe((data: any) => {
         if (data !== null) {
-          this.regError = false; // TODO: ADD "Success" message when success
+          this.regError = false;
           console.log(data);
         }
+        this.isLoading = false;
       });
+  }
+
+  onBackClick() {
+    this.router.navigate(['/auth']);
   }
 }

@@ -56,9 +56,13 @@
             Password is required or is to short
           </mat-error>
         </p>
-        <p *ngIf="regError" class="error">Custom error message</p>
+        <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+        <p *ngIf="regError && !isLoading" class="error">Custom error message</p>
         <div class="button">
-          <button type="submit" mat-button>Register</button>
+          <button mat-button (click)="onBackClick()">Back</button>
+          <button type="submit" mat-button [disabled]="isLoading">
+            Register
+          </button>
         </div>
       </form>
     </mat-card-content>
