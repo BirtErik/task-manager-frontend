@@ -1,1 +1,121 @@
-<p>list works!</p>
+<button
+  mat-raised-button
+  color="primary"
+  class="button-new"
+  (click)="createTask()"
+>
+  New Task
+</button>
+<div class="center-content" *ngFor="let task of tasks">
+  <mat-accordion>
+    <!-- LIST VIEW -->
+    <mat-expansion-panel hideToggle *ngIf="editingTask !== task">
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ task.name }} </mat-panel-title>
+        <mat-panel-description>
+          <span class="status">{{ task.status }}</span>
+          <span class="priority" [appPriorityHighlight]="task.priority">{{
+            task.priority
+          }}</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p>{{ task.description }}</p>
+
+      <button
+        type="button"
+        mat-button
+        class="button-edit"
+        (click)="toggleEdit(task)"
+      >
+        Edit
+      </button>
+    </mat-expansion-panel>
+
+    <!-- EDITING VIEW -->
+    <mat-expansion-panel hideToggle *ngIf="editingTask === task">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="task.name"
+              (keydown.space)="$event.stopPropagation()"
+            />
+          </mat-form-field>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span class="status">{{ task.status }}</span>
+          <span class="priority" [appPriorityHighlight]="task.priority">{{
+            task.priority
+          }}</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field style="width: 100%">
+        <mat-label>Enter a description</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="task.description"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          class="input-desc"
+        ></textarea>
+      </mat-form-field>
+      <p></p>
+      <mat-form-field style="width: 30%">
+        <mat-label>Choose a priority</mat-label>
+        <mat-select [(value)]="task.priority">
+          <mat-option value="HIGH">HIGH</mat-option>
+          <mat-option value="MEDIUM">MEDIUM</mat-option>
+          <mat-option value="LOW">LOW</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 32%; padding-left: 10px">
+        <mat-label>Choose a status</mat-label>
+        <mat-select [(value)]="task.status">
+          <mat-option value="TODO">TODO</mat-option>
+          <mat-option value="IN_PROGRESS">IN_PROGRESS</mat-option>
+          <mat-option value="DONE">DONE</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="buttonContainer">
+        <button
+          type="button"
+          mat-button
+          class="button-delete"
+          (click)="toggleEdit(task); deleteTask(task)"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          mat-button
+          class="button-save"
+          (click)="toggleEdit(task); saveTask(task)"
+        >
+          Save
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <p></p>
+</div>
+<div class="card">
+  <p-messages
+    *ngIf="showDeleteMessage"
+    [(value)]="deleteMessage"
+    [enableService]="false"
+    [closable]="false"
+  ></p-messages>
+</div>
+<div class="card">
+  <p-messages
+    *ngIf="showSuccessMessage"
+    [(value)]="message"
+    [enableService]="false"
+    [closable]="false"
+  ></p-messages>
+</div>

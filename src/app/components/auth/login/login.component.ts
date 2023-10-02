@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { LoginService } from 'src/app/common/services/login.service';
 import { catchError, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 interface Login {
   email: string;
@@ -18,14 +19,16 @@ interface Login {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loginData!: Login;
   authError: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private readonly loginService: LoginService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +47,7 @@ export class LoginComponent {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value,
     };
-
+    this.isLoading = true;
     this.loginService
       .loginUser(this.loginData)
       .pipe(
@@ -59,8 +62,23 @@ export class LoginComponent {
       .subscribe((data: any) => {
         if (data !== null) {
           this.authError = false;
-          console.log(data);
+          this.loginService.updateLoginInfo(data);
+
+          const jwtToken = data.jwt;
+          const role = data.data.authorities[0].authority;
+          const userId = data.data.id;
+
+          localStorage.setItem('role', role);
+          localStorage.setItem('token', jwtToken);
+          localStorage.setItem('userId', userId);
+
+          this.router.navigate(['/user']);
         }
+        this.isLoading = false;
       });
+  }
+
+  onRegisterClick() {
+    this.router.navigate(['/auth/register']);
   }
 }

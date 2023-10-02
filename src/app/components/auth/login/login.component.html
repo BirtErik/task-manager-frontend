@@ -39,9 +39,15 @@
             </mat-error>
           </mat-form-field>
         </p>
-        <p *ngIf="authError" class="error">Incorrect username or password</p>
+        <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+        <p *ngIf="authError && !isLoading" class="error">
+          Incorrect username or password
+        </p>
         <div class="button">
-          <button type="submit" mat-button>Login</button>
+          <button type="button" mat-button (click)="onRegisterClick()">
+            Register
+          </button>
+          <button type="submit" mat-button [disabled]="isLoading">Login</button>
         </div>
       </form>
     </mat-card-content>
