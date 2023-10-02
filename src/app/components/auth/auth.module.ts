@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthOutletComponent } from './auth-outlet.component';
 import { LoginService } from 'src/app/common/services/login.service';
 import { RegisterService } from 'src/app/common/services/register.service';
+import { MessagesModule } from 'primeng/messages';
 
 const authRoutes: Routes = [
   {
@@ -34,6 +35,7 @@ const authRoutes: Routes = [
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    MessagesModule,
   ],
   providers: [LoginService, RegisterService],
 })

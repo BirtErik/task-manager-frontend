@@ -1,8 +1,10 @@
-:host {
+:host{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin: 100px 0px;
-  }
+    align-items: center;
+    margin: 100px;
+}
   
   .form-parent{
     display: flex; 
@@ -31,4 +33,11 @@
   .button {
     display: flex;
     justify-content: space-between;
+  }
+
+  .center-content {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
